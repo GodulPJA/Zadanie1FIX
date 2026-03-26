@@ -1,17 +1,14 @@
 ﻿using Zadanie1FIX;
 
 Service srv = new Service();
+RentalLogic RL = new RentalLogic(srv);
 srv.UtworzIDodajStudenta("Kamil", "Kowalski");
 srv.UtworzIDodajMikrofon("c110", Mikrofon.Typ.Piezo,"XLR");
 srv.UtworzIDodajMikrofon("Tracer generic", Mikrofon.Typ.Pojemnosciowy,"USB");
-
-foreach (var tool in srv.Tools)
+Console.WriteLine(RL.WypozyczSprzet(srv.Users[0],srv.Tools[0],DateTime.Now));
+foreach (var rental in srv.Rentals)
 {
-    Console.WriteLine($"{tool.Name}");
+    Console.WriteLine($"{rental.User.FirstName} {rental.User.LastName}");
+    Console.WriteLine($"{rental.atool.CurrentState}");
+   
 }
-foreach (var user in srv.Users)
-{
-    Console.WriteLine($" {user.FirstName} {user.LastName} {user.ActiveRentals}");
-}
-
-//Todo wywalić te szybkie testy z góry i zaimplementować w Servuce
