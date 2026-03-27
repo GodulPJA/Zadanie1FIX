@@ -31,4 +31,3 @@ public class Service
         Tools.Add(new Kabel(nazwa, wtyczka1, wtyczka2, dlugosc, State.Wolny));
     }
 }
-//todo metody realizujące Rental
