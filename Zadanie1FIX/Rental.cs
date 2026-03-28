@@ -4,7 +4,7 @@ public class Rental
 {
     public DateTime startDate { get; }
     public DateTime endDate { set; get; }
-    public DateTime accualEndDate { set; get; } //zwrot terminowy będzie sprawdzany w klasie interfesju prównując daty
+    public DateTime accualEndDate { set; get; }
     public int additionalCost { set; get; }
     public Tool atool;
     public Guid Id { get; set; }

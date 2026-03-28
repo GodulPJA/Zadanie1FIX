@@ -2,11 +2,13 @@
 
 public class Tool
 {
+    public Guid Id { get; private set; }
     public State CurrentState { get; set; }
     public string Name { get; set; }
 
     public Tool(string name, State state)
     {
+        Id = Guid.NewGuid();
         Name = name;
         CurrentState = state;
     }
