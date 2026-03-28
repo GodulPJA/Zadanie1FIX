@@ -2,6 +2,40 @@
 
 Service srv = new Service();
 RentalLogic RL = new RentalLogic(srv);
+Console.WriteLine("TEST");
+srv.UtworzIDodajLaptopa("ThinkPad", Laptop.OS.Windows, 14);
+srv.UtworzIDodajMikrofon("AKG", Mikrofon.Typ.Dynamiczny, "USB/XLR");
+srv.UtworzIDodajKabel("Kabel HDMI", Kabel.Wtyczka.HDMI, Kabel.Wtyczka.HDMI, 2);
+Console.WriteLine("Dodany sprzęt testowy");
+for (int i = 0; i < srv.Tools.Count; i++)
+    Console.WriteLine($"[{i}] {srv.Tools[i].Name} ({srv.Tools[i].CurrentState})");
+
+srv.UtworzIDodajStudenta("Kamil", "Kowalski");
+srv.UtworzIDodajPracownika("Jan", "Nowak");
+Console.WriteLine("Dodani testowi userzy:");
+for (int i = 0; i < srv.Users.Count; i++)
+    Console.WriteLine($"[{i}] {srv.Users[i].FirstName} {srv.Users[i].LastName} {srv.Users[i].GetType().Name}");
+Console.WriteLine("wyporzyczenie tego samego sprzętu:");
+try {
+    Console.WriteLine("próba wyporzyczenia");
+    RL.WypozyczSprzet(srv.Users[0], srv.Tools[0], DateTime.Now.AddDays(7));
+    Console.WriteLine("próba wyporzyczenia");
+    RL.WypozyczSprzet(srv.Users[1], srv.Tools[0], DateTime.Now.AddDays(7));
+}
+catch (Exception ex) {
+    Console.WriteLine("nie można wyporzyczyć tego samego dwa razy");
+}
+Console.WriteLine("zwrot w terminei:");
+RL.ZwrotSprzetu(srv.Tools[0]);
+Console.WriteLine("zwrócono pomyślnie.");
+Console.WriteLine("zwrot po terminie:");
+RL.WypozyczSprzet(srv.Users[0], srv.Tools[2], DateTime.Now.AddDays(-5));
+Console.WriteLine($"id wyporzyczenia {srv.Rentals.Last().Id}");
+RL.ZwrotSprzetu(srv.Tools[2]);
+Console.WriteLine($"kara dla id: {srv.Rentals.Last().Id} {srv.Rentals.Last().additionalCost}");
+Console.WriteLine();
+Console.WriteLine(RL.Raport());
+
 srv.UtworzIDodajStudenta("Kamil", "Kowalski");
 srv.UtworzIDodajMikrofon("c110", Mikrofon.Typ.Piezo,"XLR");
 srv.UtworzIDodajMikrofon("Tracer generic", Mikrofon.Typ.Pojemnosciowy,"USB");
